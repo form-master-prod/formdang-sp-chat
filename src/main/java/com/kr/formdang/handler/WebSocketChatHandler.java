@@ -28,6 +28,7 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         sessions.parallelStream().forEach(it -> {
             try {
+                System.out.println("세션 아이디: " + session.getId());
                 it.sendMessage(message);
             } catch (IOException e) {
                 throw new RuntimeException(e);
