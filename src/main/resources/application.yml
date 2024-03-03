@@ -1,12 +1,33 @@
+server:
+    port: 8724
+    shutdown: graceful
+    servlet:
+        context-path: /socket/sp
+
 spring:
-    session:
-        store-type: redis
-    redis:
-        host: localhost
-        port: 6379
-    data:
-        mongodb:
-            host: localhost
-            port: 27017
-            authentication-database: admin
-            database: formdang-chat
+    profiles:
+        active: local
+
+token:
+    access-expired-time: 3600
+    refresh-expired-time: 604800
+    jwt-key: LNS2CR13KJ7JYB03FNGX8TP73X9KYWOA
+
+#LOG
+logging:
+    level:
+        root: info
+        jdbc.sqlonly: debug
+        jdbc.audit: debug
+        jdbc.resultset: debug
+        jdbc.connection: debug
+        http.logging: debug
+        org.springframework.test: warn
+        com.amazonaws.util.EC2MetadataUtils: error
+    pattern:
+        console: "%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] [%logger{0}:%line] [%X{request_id:-startup}] - %msg%n"
+        file: "%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] [%logger{0}:%line] [%X{request_id:-startup}] - %msg%n"
+    logback:
+        rolling policy:
+            max-history: 365
+            max-file-size: 100MB

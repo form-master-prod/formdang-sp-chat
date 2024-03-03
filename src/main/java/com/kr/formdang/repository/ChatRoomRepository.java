@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ChatRoomRepository extends MongoRepository<ChatRoom, String> {
 
-    List<ChatRoom> findByUserId(String userId);
+    List<ChatRoom> findByUserId(Long userId);
 }

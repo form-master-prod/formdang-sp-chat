@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>채팅방 리스트</title>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+</head>
+<body>
+    <div>
+        <h2>채팅방 리스트</h2>
+    </div>
+    <div id="main-content" class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="connect">내방 리스트 조회:</label>
+                        <button id="connect" class="btn btn-default" type="button" onclick="callRoomList()">조회</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="conversation" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Greetings</th>
+                    </tr>
+                    </thead>
+                    <tbody id="greetings">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    function callRoomList() {
+
+
+        $.ajax({
+            url: 'http://localhost:8724/socket/sp/find/chat/room',
+            method: "GET",
+            headers: {
+                'Authorization': "Bearer eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjMzIiwiZXhwIjoxNzA5NDU2MDQ4LCJpYXQiOjE3MDk0MzQ0NDgsImlzcyI6Ii9pc3N1ZSJ9.P9eQD_k8_Ns_LPCp3CjwkuYyes9ykRgB1s3aMY7fRTIHNdBJcYio0DNrtau8AjtBxmzAMFiHx53KuL0hat-IIA"
+            },
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            success: (r) => {
+                const rooms = r.chatRooms
+                for (let v of  rooms) {
+                    $('#greetings').append(`<div>${v.name}<button class="btn btn-default" type="button" onclick="move(${v.id})">Send</button></div>`)
+                }
+            },
+            error: (e) => {
+                console.log(e)
+            }
+        })
+
+    }
+
+    function move(id) {
+        location.href = `http://localhost:8724/socket/sp/view/chat?id=${id}`
+    }
+
+</script>
+
+
+</html>

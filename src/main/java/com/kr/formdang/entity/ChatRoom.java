@@ -1,20 +1,28 @@
 package com.kr.formdang.entity;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+@ToString
 @Document(collection = "chatRoom")
 public class ChatRoom {
 
     @Id
-    private String id;
-    private String userId;
+    private long id;
+    private Long userId;
     private String name;
 
-    public ChatRoom(String id, String userId, String name) {
-        this.id = id;
+    public ChatRoom(Long userId, String name) {
         this.userId = userId;
         this.name = name;
     }
