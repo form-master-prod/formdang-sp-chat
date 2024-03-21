@@ -1,33 +1,26 @@
 server:
     port: 8724
     shutdown: graceful
-    servlet:
-        context-path: /socket/sp
+
 
 spring:
     profiles:
         active: local
+        group:
+          local:
+              - console-logging # 콘솔 로깅만 사용
+          test:
+              - console-logging
+              - file-logging # 파일 로깅 사용
+          prod:
+              - console-logging
+              - file-logging # 파일 로깅 사용
+
+#    config: include 사용하기 위한 레거시 사용 플래그
+#        use-legacy-processing: true
 
 token:
     access-expired-time: 3600
     refresh-expired-time: 604800
     jwt-key: LNS2CR13KJ7JYB03FNGX8TP73X9KYWOA
 
-#LOG
-logging:
-    level:
-        root: info
-        jdbc.sqlonly: debug
-        jdbc.audit: debug
-        jdbc.resultset: debug
-        jdbc.connection: debug
-        http.logging: debug
-        org.springframework.test: warn
-        com.amazonaws.util.EC2MetadataUtils: error
-    pattern:
-        console: "%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] [%logger{0}:%line] [%X{request_id:-startup}] - %msg%n"
-        file: "%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%thread] [%logger{0}:%line] [%X{request_id:-startup}] - %msg%n"
-    logback:
-        rolling policy:
-            max-history: 365
-            max-file-size: 100MB
