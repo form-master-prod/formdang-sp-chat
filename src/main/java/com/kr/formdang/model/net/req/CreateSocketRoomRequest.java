@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateChatRoomRequest extends DefaultRequest {
+public class CreateSocketRoomRequest extends DefaultRequest {
 
-    @NotNull(message = "채팅방 제목이 누락되었습니다.")
-    private String name; // 채팅방 제목
+    @NotNull(message = "채팅방 아이디가 누락되었습니다.")
+    private String channel; // 채팅방 아이디
 }

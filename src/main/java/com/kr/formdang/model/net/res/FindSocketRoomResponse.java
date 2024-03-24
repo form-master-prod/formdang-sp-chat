@@ -3,7 +3,6 @@ package com.kr.formdang.model.net.res;
 import com.kr.formdang.entity.ChatRoom;
 import com.kr.formdang.model.root.DefaultResponse;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -12,8 +11,8 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class FindChatRoomResponse extends DefaultResponse {
+public class FindSocketRoomResponse extends DefaultResponse {
 
-    private List<ChatRoom> chatRooms;
+    private List<String> channels; // 채팅방 아이디 리스트
 
 }
